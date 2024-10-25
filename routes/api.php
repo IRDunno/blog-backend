@@ -3,6 +3,7 @@
 // use Illuminate\Http\Request;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,10 @@ Route::group(["prefix" => "auth"], function() {
     Route::get("/user", [AuthController::class, "user"]);
 });
 
+Route::group(["prefix" => "blogs"], function() {
+    Route::post("/", [BlogController::class, "store"])->middleware(["auth:api"]);
+    Route::get("/", [BlogController::class, "index"]);
+    Route::get("/{blog}", [BlogController::class, "show"]);
+    Route::patch("/{blog}", [BlogController::class, "update"])->middleware(["auth:api"]);
+    Route::delete("/{blog}", [BlogController::class, "destroy"])->middleware(["auth:api"]);
+});
