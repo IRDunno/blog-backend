@@ -60,7 +60,13 @@ class User extends Authenticatable implements JWTSubject {
     return $this->hasMany(Blog::class);
   }
   
-  public function likedBlogs() {
+  // attach or detach
+  public function likeBlog() {
     return $this->belongsToMany(Blog::class, "blog_likes")->withTimestamps();
+  }
+
+  // check if user liked a blog
+  public function likedBlog(Blog $blog) {
+    return $this->likeBlog()->where("blog_id", $blog->id)->exists();
   }
 }

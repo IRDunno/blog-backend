@@ -21,17 +21,21 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::group(["prefix" => "auth"], function() {
-    Route::post("/register", [AuthController::class, "register"]);
-    Route::post("/login", [AuthController::class, "login"]);
-    Route::post("/logout", [AuthController::class, "logout"])->middleware(["auth:api"]);
-    Route::get("/user", [AuthController::class, "user"]);
+Route::group(["prefix" => "auth"], function () {
+  Route::post("/register", [AuthController::class, "register"]);
+  Route::post("/login", [AuthController::class, "login"]);
+  Route::post("/logout", [AuthController::class, "logout"])->middleware(["auth:api"]);
+  Route::get("/user", [AuthController::class, "user"]);
 });
 
-Route::group(["prefix" => "blogs"], function() {
-    Route::post("/", [BlogController::class, "store"])->middleware(["auth:api"]);
-    Route::get("/", [BlogController::class, "index"]);
-    Route::get("/{blog}", [BlogController::class, "show"]);
-    Route::patch("/{blog}", [BlogController::class, "update"])->middleware(["auth:api"]);
-    Route::delete("/{blog}", [BlogController::class, "destroy"])->middleware(["auth:api"]);
+Route::group(["prefix" => "blogs"], function () {
+  Route::post("/", [BlogController::class, "store"])->middleware(["auth:api"]);
+  Route::get("/", [BlogController::class, "index"]);
+  Route::get("/{blog}", [BlogController::class, "show"]);
+  Route::patch("/{blog}", [BlogController::class, "update"])->middleware(["auth:api"]);
+  Route::delete("/{blog}", [BlogController::class, "destroy"])->middleware(["auth:api"]);
+
+  // Like and Unlike
+  Route::post("/{blog}/like", [BlogController::class, "like"])->middleware(["auth:api"]);
+  Route::delete("/{blog}/unlike", [BlogController::class, "unlike"])->middleware(["auth:api"]);
 });
