@@ -4,6 +4,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,4 +39,9 @@ Route::group(["prefix" => "blogs"], function () {
   // Like and Unlike
   Route::post("/{blog}/like", [BlogController::class, "like"])->middleware(["auth:api"]);
   Route::delete("/{blog}/unlike", [BlogController::class, "unlike"])->middleware(["auth:api"]);
+});
+
+Route::group(["prefix" => "profile"], function() {
+  Route::patch("/info/{user}", [ProfileController::class, "updateInfo"])->middleware(["auth:api"]);
+  Route::patch("/password/{user}", [ProfileController::class, "updatePassword"])->middleware(["auth:api"]);
 });
