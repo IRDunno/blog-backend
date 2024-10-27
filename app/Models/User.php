@@ -17,10 +17,10 @@ class User extends Authenticatable implements JWTSubject {
    *
    * @var array<int, string>
    */
-  protected $fillable = [
-    'name',
-    'email',
-    'password',
+  protected $guarded = [
+    'created_at',
+    'id',
+    'updated_at',
   ];
 
   /**
@@ -59,7 +59,7 @@ class User extends Authenticatable implements JWTSubject {
   public function blogs() {
     return $this->hasMany(Blog::class);
   }
-  
+
   // attach or detach
   public function likeBlog() {
     return $this->belongsToMany(Blog::class, "blog_likes")->withTimestamps();

@@ -22,7 +22,7 @@ class UpdateInfoRequest extends FormRequest {
     return [
       "name" => "required|min:3|max:255",
       "email" => "required|email|unique:users,email,$user_id",
-      "image" => "image"
+      "image" => "nullable|image"
     ];
   }
 }
