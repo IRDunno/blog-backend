@@ -10,7 +10,7 @@ use App\Models\Blog;
 
 class BlogController extends Controller {
   public function index() {
-    $blogs = Blog::all();
+    $blogs = Blog::orderBy("created_at", "DESC")->get();
     return BlogResource::collection($blogs);
   }
 
