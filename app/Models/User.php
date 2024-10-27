@@ -74,6 +74,6 @@ class User extends Authenticatable implements JWTSubject {
     if ($this->image) {
       return url("storage/" . $this->image);
     }
-    return "http://127.0.0.1:8000/storage/profile/image.png";
+    return "http://127.0.0.1:8000/storage/profile/default_profile.png";
   }
 }
