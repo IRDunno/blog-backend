@@ -69,4 +69,11 @@ class User extends Authenticatable implements JWTSubject {
   public function likedBlog(Blog $blog) {
     return $this->likeBlog()->where("blog_id", $blog->id)->exists();
   }
+
+  public function getImageURL() {
+    if ($this->image) {
+      return url("storage/" . $this->image);
+    }
+    return "http://127.0.0.1:8000/storage/profile/image.png";
+  }
 }
