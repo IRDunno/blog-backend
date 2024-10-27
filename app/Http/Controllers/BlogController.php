@@ -7,6 +7,7 @@ use App\Http\Requests\Blog\UpdateRequest;
 use App\Http\Resources\BlogResource;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\User;
 
 class BlogController extends Controller {
   public function index() {
@@ -50,5 +51,10 @@ class BlogController extends Controller {
     $liker = $request->user();
     $liker->likeBlog()->detach($blog);
     return new BlogResource($blog);
+  }
+
+  public function userBlogs(User $user) {
+    $blogs = $user->blogs;
+    return BlogResource::collection($blogs);
   }
 }

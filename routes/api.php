@@ -36,6 +36,9 @@ Route::group(["prefix" => "blogs"], function () {
   Route::patch("/{blog}", [BlogController::class, "update"])->middleware(["auth:api"]);
   Route::delete("/{blog}", [BlogController::class, "destroy"])->middleware(["auth:api"]);
 
+  // User Blogs
+  Route::get("/user/{user}", [BlogController::class, "userBlogs"])->middleware(["auth:api"]);
+
   // Like and Unlike
   Route::post("/{blog}/like", [BlogController::class, "like"])->middleware(["auth:api"]);
   Route::delete("/{blog}/unlike", [BlogController::class, "unlike"])->middleware(["auth:api"]);
