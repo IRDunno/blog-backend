@@ -11,7 +11,7 @@ use App\Models\User;
 
 class BlogController extends Controller {
   public function index() {
-    $blogs = Blog::orderBy("created_at", "DESC")->get();
+    $blogs = Blog::orderBy("created_at", "DESC")->paginate(3);
     return BlogResource::collection($blogs);
   }
 
