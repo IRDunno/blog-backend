@@ -54,7 +54,7 @@ class BlogController extends Controller {
   }
 
   public function userBlogs(User $user) {
-    $blogs = $user->blogs;
+    $blogs = $user->blogs()->paginate(3);
     return BlogResource::collection($blogs);
   }
 }
