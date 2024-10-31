@@ -13,8 +13,11 @@ class ProfileController extends Controller {
   public function updateInfo(UpdateInfoRequest $request, User $user) {
     $this->authorize("update", $user);
     $validated = $request->validated();
-    if ($request->hasFile("image")) {
-      $imagePath = $request->file("image")->store("profile", "public");
+    if ($request->hasFile("image") || $request->input("default")) {
+      $imagePath = null;
+      if (!$request->input("default")) {
+        $imagePath = $request->file("image")->store("profile", "public");
+      }
       $validated["image"] = $imagePath;
       Storage::disk("public")->delete($user->image ?? "");
     }
